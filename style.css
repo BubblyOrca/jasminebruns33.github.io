@@ -1,0 +1,20 @@
+p {
+  color: black;
+}
+#name {
+text-align: center;   
+}
+img {
+align-self: center;
+position: relative;
+height: 320px;
+width: 500px;
+}
+.info {
+    background-color: rgb(218,165,32);
+    border: double;
+}
+.section{
+    background-color: rgb(128,0,0);
+    color:rgb(244,164,96)
+}
