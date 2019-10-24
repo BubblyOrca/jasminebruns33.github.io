@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Test AJAX page</title>
+  <link rel="stylesheet" type="text/css" href="./lab_styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <div class="header">Test AJAX page</div>
+      <button class="button" onclick="loadData()">Load Some JSON</button>
+      <div class="content"> 
+        <ol class="instructions">
+          <li>At the click of the button above</li>
+          <li>Replace this list</li>
+          <li>With an ordered list</li>
+          <li>Of fifty randomly-selected countries</li>
+          <li>Every time you click the above button</li>
+          <li>The list of countries should change</li>
+          <ol>
+            <li>Use your Developer tools to experiment with possible answers</li>
+            <li>When you have an idea of the correct code</li>
+            <li>Write it into your copy of the Lab HTML</li>
+            <li>And save it for submission</li>
+          </ol>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </div>
+  <script>
+    function loadData() {
+      fetch('ajax_sample.json')
+        .then(res => res.json())
+        .then(res => {
+
+      
+      const nameArray = res.map((i) => i.name);
+      
+      const instructions = document.querySelector('.instructions');
+      instructions.innerHTML = '';
+      
+      for(let i = 0; i < 15; i ++){
+        const selectNumber = getRandomIntInclusive(0, 242);
+        let el = document.createElement("li");
+        el.innerText = nameArray[selectNumber];
+        instructions.appendChild(el);
+      };
+      
+    
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    }  
+        })
+      }
+    
+ 
+        
+  </script>
+</body>
+
+</html>
