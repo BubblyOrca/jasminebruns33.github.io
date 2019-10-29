@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title> UMD Bus Routes API </title>
+    <link rel="stylesheet" type="text/css" href="./lab_styles.css" />
+  </head>
 
-<head>
-  <title>Test API Loader Page </title>
-  <link rel="stylesheet" type="text/css" href="./lab_styles.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="wrapper">
-      <div class="header">API Loader</div>
-      <button class="button" onclick="loadData()">Load Some JSON from a server</button>
-      <div class="content">
-        <ul class="abc">
-        </ul>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">UMD Bus API</div>
+        <button class="button" onclick="loadData()">Load Some JSON</button>
+        <div class="content"></div>
+        <div class="footer"></div>
       </div>
-      <div class="footer"></div>
     </div>
-  </div>
-  <script>
-    function loadData() {
-      console.log('fetch'); // confirm code is running on click
-      fetch('https://api.umd.io/v0/bus/routes') /* New endpoint */
-        .then(res => res.json())
-        .then(res => {
-          console.log(res); // logging step to check what we got
-          return res; /* (1) Logs out response data */
-        })
-        .then(res => res.map(c => c.route_id + c.title)) /* (2) Make an array of route data*/
-        .then(res => {
-        const instructions = document.querySelector('.abc');
-        instructions.innerHTML = '';
-        for(let i = 0; i < 15; i ++){
-        let el = document.createElement("li");
-        el.innerText = nameArray[selectNumber];
-        instructions.appendChild(el);
-        };
-        })
-
+    <script>
+      function loadData() {
+        fetch("https://api.umd.io/v0/bus/routes")
+          .then(res => res.json()) /* update new data */
+          .then(res => res.map(r => r))
+          .then(r => {
+            text2 = "<ul>"; /* begins unordered list*/
+            for (i = 0; i < r.length; i++) {
+             
+              text2 +=
+                "<li> Route:" +
+                r[i].title +
+                " (ID:" +
+                r[i].route_id +
+                ") </li>";
+            } 
+            text2 += "</ul>";
+            document.querySelector(".content").innerHTML = text2;
+            return r;
+          }) 
+          
+          .then(res => {
+            var x = document.getElementsByClassName("header");
+            var randoNumber = Math.floor(Math.random() * res.length);
+            var rTitle = res[randoNumber].title;
+            var rID = res[randoNumber].route_id;        
+            function checkMatch (arg1,arg2){
+              if (arg1.search(arg2)==-1) {
+                return arg1;
+              }else if(arg1.match(rID).length >= 1){
+                arg1 = arg1.replace(rID,'');
+                return arg1;
+              }
+            }
+            rTitle = checkMatch(rTitle,rID);
+            x[0].innerHTML =
+              "UMD Bus Route " + rID + " " +rTitle;
+            console.log("response: ", res);
+          });
+      }
+    </script>
+  </body>
+</html>
         .then(codes => document.querySelector(".content").innerText = codes);
     }
   </script>
