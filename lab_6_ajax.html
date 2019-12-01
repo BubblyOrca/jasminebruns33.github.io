@@ -9,56 +9,40 @@
 <body>
   <div class="container">
     <div class="wrapper">
-      <div class="header">Test AJAX page</div>
-      <button class="button" onclick="loadData()">Load Some JSON</button>
-      <div class="content"> 
-        <ol class="instructions">
-          <li>At the click of the button above</li>
-          <li>Replace this list</li>
-          <li>With an ordered list</li>
-          <li>Of fifty randomly-selected countries</li>
-          <li>Every time you click the above button</li>
-          <li>The list of countries should change</li>
-          <ol>
-            <li>Use your Developer tools to experiment with possible answers</li>
-            <li>When you have an idea of the correct code</li>
-            <li>Write it into your copy of the Lab HTML</li>
-            <li>And save it for submission</li>
-          </ol>
+      <div class="header">API Loader</div>
+      <button class="button" onclick="loadData()">Load Some JSON from a server</button>
+      <div class="content">
+        <ol class="abc">
+        </ol>
       </div>
       <div class="footer"></div>
     </div>
   </div>
   <script>
     function loadData() {
-      fetch('ajax_sample.json')
-        .then(res => res.json())
-        .then(res => {
-
-      
       const nameArray = res.map((i) => i.name);
       
-      const instructions = document.querySelector('.instructions');
+      const instructions = document.querySelector('.abc');
       instructions.innerHTML = '';
-      
-      for(let i = 0; i < 15; i ++){
-        const selectNumber = getRandomIntInclusive(0, 242);
-        let el = document.createElement("li");
-        el.innerText = nameArray[selectNumber];
-        instructions.appendChild(el);
-      };
-      
-    
-    function getRandomIntInclusive(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-    }  
+
+      console.log('fetch'); // confirm code is running on click
+      fetch('ajax_sample.json') // fetches API inserted in the HTML
+        .then(res => res.json()) // changes res data into json script
+        .then(res => { //
+          console.log(res); // logging step to check what we got
+          return res;
         })
-      }
-    
- 
-        
+        .then(res => {
+          const info = res.data
+          const instructions = document.querySelector('.abc');
+          instructions.innerHTML = '';
+          for (let i = 0; i < info.length; i++) {
+            let el = document.createElement("li");
+            el.innerText = info[i];
+            instructions.appendChild(el);
+          }
+        });
+    }
   </script>
 </body>
 
