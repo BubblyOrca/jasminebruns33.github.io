@@ -12,7 +12,7 @@
       <div class="header">API Loader</div>
       <button class="button" onclick="loadData()">Load Some JSON from a server</button>
       <div class="content">
-        <ol class="abc">
+        <ol class="instructions">
         </ol>
       </div>
       <div class="footer"></div>
@@ -20,16 +20,20 @@
   </div>
   <script>
     function loadData() {
+      const nameArray = res.map((i) => i.name);
+      
+      const instructions = document.querySelector('.abc');
+      instructions.innerHTML = '';
       console.log('fetch'); // confirm code is running on click
-      fetch('/api')
-        .then(res => res.json())
-        .then(res => {
+      fetch('https://api.umd.io/v0/bus/routes') // fetches API inserted in the HTML
+        .then(res => res.json()) // changes res data into json script
+        .then(res => { //
           console.log(res); // logging step to check what we got
           return res;
         })
         .then(res => {
           const info = res.data
-          const instructions = document.querySelector('.abc');
+          const instructions = document.querySelector('.instructions');
           instructions.innerHTML = '';
           for (let i = 0; i < info.length; i++) {
             let el = document.createElement("li");
