@@ -1,22 +1,46 @@
 {
-  "name": "sample_server",
+  "name": "now-ui-kit-react",
   "version": "1.0.0",
-  "description": "A sample webserver to pull UMD.io data and push it to a local page",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "Alex Leitch",
-  "license": "CC-BY-SA-4.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.0"
+    "moment": "2.24.0",
+    "node-sass": "4.12.0",
+    "nouislider": "14.0.2",
+    "react": "16.8.6",
+    "react-bootstrap-switch": "15.5.3",
+    "react-datetime": "2.16.3",
+    "react-dom": "16.8.6",
+    "react-router": "5.0.1",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.0.1",
+    "reactstrap": "8.0.1"
   },
-  "devDependencies": {
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-import": "^2.18.2"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css",
+    "minify-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.min.css --output-style compressed",
+    "map-sass": "node-sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css --source-map true"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "optionalDependencies": {
+    "typescript": "3.5.3"
   }
 }
